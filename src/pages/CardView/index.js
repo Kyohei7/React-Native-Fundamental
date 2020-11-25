@@ -1,9 +1,7 @@
-
-import React, { Component } from 'react';
+import React from 'react';
 import {Text, View, Image} from 'react-native'; 
-import macbook from './macbook.jpg'
+import macbook from '../../../src/assets/image/macbook.jpg'
 
-// export 
 const CardView = () => {
     return (
         <View>
