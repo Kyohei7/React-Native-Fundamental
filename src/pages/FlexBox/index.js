@@ -3,7 +3,47 @@ import { Image, Text, View } from 'react-native';
 import macbook from '../../../src/assets/image/macbook.jpg'
 
 class FlexBox extends Component {
-    render() {
+    // LifeCycle Class Component :
+        
+        // Mounting (Ketika Muncul) :  
+        //   - Constructor (method yang dipanggil saat komponen akan muncul)
+        //   - Render (method kedua yang dipanggil saat komponen akan muncul)
+        //   - Component did Mount (method ketiga yang dipanggil saat komponen akan muncul)
+        
+        // Updatting (Ketika Berubah) :
+        //   - Render
+        //   - Component did update
+        
+        // Unmounting (Ketika Hilang ) -> Component will Unmount
+    
+    
+    constructor(props) { // Proses Pertama Mounting
+        super(props)
+        console.log(' ------> Constructor');
+        this.state = {
+            follower: 5000,
+        }
+    }
+
+    componentDidMount() { // Proses Ketiga  Mounting
+        console.log(' ------> Component did mount');
+        setTimeout(() => {
+            this.setState({
+                follower: '5 Juta',
+            })
+        }, 5000)
+    }
+
+    componentDidUpdate() { // Proses ini akan muncul bila ada proses Update di componentdidmount
+        console.log('-------> Component did Update');
+    }
+
+    componentWillUnmount() {
+        console.log('--------> Component will unmount');
+    }
+
+    render() { // // Proses Kedua Mounting & Updating
+        console.log(' ------> Render');
         return(
             <View>
                 <View style={{
@@ -42,7 +82,7 @@ class FlexBox extends Component {
                             }} />
                     <View>
                         <Text style={{fontSize: 20, fontWeight: 'bold'}} >Muhammad Rizki</Text>
-                        <Text>Android Developer</Text>
+                        <Text> {this.state.follower} Followers</Text>
                     </View>
                 </View>
             </View> 

@@ -9,7 +9,7 @@ const Position = () => {
                 <Image source={macbook} style={styles.icon} />
                 <Text style={styles.notif} >20</Text>
             </View>
-            <Text style={styles.text} >Online</Text>
+            <Text style={styles.text} >Cart</Text>
         </View>
     )
 }
