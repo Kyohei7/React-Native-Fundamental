@@ -8,7 +8,7 @@ import Position from './pages/Position'
 
 const App = () => {
   
-  const [tampil, setTampil] = useState(true) // Fucntion Component dengan Hooks
+  const [tampil, setTampil] = useState(true) // Function Component dengan Hooks
   useEffect(() => {
     setTimeout(() => {
       setTampil(false)
