@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import CardView from './pages/CardView'
 import FlexBox from './pages/FlexBox'
 import Position from './pages/Position'
+import PropsDynamic from './pages/PropsDynamic';
 
 
 const App = () => {
@@ -17,8 +18,7 @@ const App = () => {
   
   return (
     <View>
-      { tampil && <FlexBox /> }
-      {/* <FlexBox /> */}
+      <PropsDynamic />
     </View>
   )
 }
