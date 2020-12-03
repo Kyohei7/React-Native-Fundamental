@@ -4,7 +4,7 @@ import macbook from '../../../src/assets/image/macbook.jpg'
 
 const CardView = () => {
     return (
-        <View>
+        <View style={{alignItems: 'center'}} >
             <View 
               style={{
                 padding: 12, 
