@@ -1,6 +1,7 @@
 // Functional Component
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
+import CallApiAxios from './pages/CallApiAxios';
 import CallApiVanillaJs from './pages/CallApiVanillaJs';
 import CardView from './pages/CardView'
 import ComunicationComponent from './pages/ComunicationComponent';
@@ -14,7 +15,7 @@ import StateDynamic from './pages/StateDynamic/inde';
 const App = () => {  
   return (
     <View>
-      <CallApiVanillaJs />
+      <CallApiAxios />
     </View>
   )
 }
