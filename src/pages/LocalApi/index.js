@@ -1,11 +1,13 @@
 import Axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, View, Image, ScrollView, TextInput, Button } from 'react-native'
+import { StyleSheet, Text, View, Image, ScrollView, TextInput, Button, TouchableOpacity } from 'react-native'
 
-const Item = ({ name, time, details }) => {
+const Item = ({ name, time, details, onPress }) => {
     return(
         <View style={styles.itemContainer} >
-                <Image source={{uri: 'https://i.pravatar.cc/150'}} style={styles.avatar} />
+                <TouchableOpacity onPress={onPress}>
+                    <Image source={{uri: 'https://i.pravatar.cc/150'}} style={styles.avatar} />
+                </TouchableOpacity>
                     <View style={styles.desc} >
                         <Text style={styles.descName}> {name} </Text>
                         <Text style={styles.descTime}> {time} </Text>
@@ -24,6 +26,9 @@ const LocalApi = () => {
     const [details, setDetails] = useState("")
 
     const [todos, setTodos] = useState([])
+    const [button, setButton] = useState("Simpan")
+
+    const [selectedTodos, setSelectedTodos] = useState({})
 
     // Aplikasi Pertama Kali muncul langsung GetData
     useEffect(() => {
@@ -31,22 +36,34 @@ const LocalApi = () => {
     }, [])
 
     
-    // Post Data
     const submit = () => {
-        const data = {
-            name,
-            time,
-            details
-        }
-        console.log('Data Sebelum di Set ', data)
-        Axios.post('http://10.0.2.2:3000/todos', data)
-            .then(res => {
-                console.log('res: ', res)
-                setName("")
-                setTime("")
-                setDetails("")
-                getData()
+        
+        const data = { name, time, details }
+        
+        // Membuat Kondisi untuk method button nya
+        // Post Data
+        if(button === "Simpan") {
+            Axios.post('http://10.0.2.2:3000/todos', data)
+                .then(res => {
+                    console.log('res: ', res)
+                    setName("")
+                    setTime("")
+                    setDetails("")
+                    getData()
             })
+        } else if(button === "Update") {
+            // Update Data
+            Axios.put(`http://10.0.2.2:3000/todos/${selectedTodos.id}`, data)
+                    .then(res => {
+                        console.log('Update : ', res);
+                        setName("")
+                        setTime("")
+                        setDetails("")
+                        getData()
+                        setButton("Simpan")
+                    })
+            }
+        
     }  
 
     // Get Data
@@ -56,6 +73,16 @@ const LocalApi = () => {
                 console.log('Res : ', res)
                 setTodos(res.data)
             })
+    }
+
+    // Select Item Data
+    const selectItem = (item) => {
+        console.log('Selected Item : ', item)
+        setSelectedTodos(item)
+        setName(item.name)
+        setTime(item.time)
+        setDetails(item.details)
+        setButton("Update")
     }
 
     return(
@@ -77,10 +104,10 @@ const LocalApi = () => {
                     style={styles.input} 
                     value={details} 
                     onChangeText={(value) => setDetails(value)} />
-                <Button title="Simpan" onPress={submit} />
+                <Button title={button} onPress={submit} />
             </View>
                 {todos.map(todo => {
-                    return <Item key={todo.id} name={todo.name} time={todo.time} details={todo.details} />
+                    return <Item key={todo.id} name={todo.name} time={todo.time} details={todo.details} onPress={() => selectItem(todo)} />
                 })}
         </ScrollView>
     )

@@ -1,10 +1,10 @@
 {
   "todos": [
     {
-      "id": 1,
       "name": "Bangun Pagi",
       "time": "02.00 WIB",
-      "details": "Bangun Pagi Lebih Awal Hari ini"
+      "details": "Bangun Pagi Lebih Awal Hari ini",
+      "id": 1
     },
     {
       "name": "React Native",
@@ -13,7 +13,7 @@
       "id": 2
     },
     {
-      "name": "Lari Pagi ",
+      "name": "Lari Sore",
       "time": "05.00",
       "details": "lari pagi di lapangan pomad",
       "id": 3
