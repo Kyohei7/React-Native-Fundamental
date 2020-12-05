@@ -1,15 +1,15 @@
 import Axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, Image, ScrollView, TextInput, Button } from 'react-native'
 
-const Item = () => {
+const Item = ({ name, time, details }) => {
     return(
         <View style={styles.itemContainer} >
                 <Image source={{uri: 'https://i.pravatar.cc/150'}} style={styles.avatar} />
                     <View style={styles.desc} >
-                        <Text style={styles.descName}> Bangun Pagi </Text>
-                        <Text style={styles.descTime}> 03.30 WIB </Text>
-                        <Text style={styles.descDetails}> Bangun pagi lebih awal </Text>
+                        <Text style={styles.descName}> {name} </Text>
+                        <Text style={styles.descTime}> {time} </Text>
+                        <Text style={styles.descDetails}> {details} </Text>
                     </View>
                     <Text style={styles.delete} >Hapus</Text> 
             </View>
@@ -22,7 +22,16 @@ const LocalApi = () => {
     const [name, setName] = useState("")
     const [time, setTime] = useState("")
     const [details, setDetails] = useState("")
+
+    const [todos, setTodos] = useState([])
+
+    // Aplikasi Pertama Kali muncul langsung GetData
+    useEffect(() => {
+        getData()
+    }, [])
+
     
+    // Post Data
     const submit = () => {
         const data = {
             name,
@@ -36,8 +45,18 @@ const LocalApi = () => {
                 setName("")
                 setTime("")
                 setDetails("")
+                getData()
             })
     }  
+
+    // Get Data
+    const getData = () => {
+        Axios.get('http://10.0.2.2:3000/todos')
+            .then(res => {
+                console.log('Res : ', res)
+                setTodos(res.data)
+            })
+    }
 
     return(
         <ScrollView style={styles.wrapper} >
@@ -60,18 +79,9 @@ const LocalApi = () => {
                     onChangeText={(value) => setDetails(value)} />
                 <Button title="Simpan" onPress={submit} />
             </View>
-                <Item />
-                <Item />
-                <Item />
-                <Item />
-                <Item />
-                <Item />
-                <Item />
-                <Item />
-                <Item />
-                <Item />
-                <Item />
-                <Item />
+                {todos.map(todo => {
+                    return <Item key={todo.id} name={todo.name} time={todo.time} details={todo.details} />
+                })}
         </ScrollView>
     )
 }

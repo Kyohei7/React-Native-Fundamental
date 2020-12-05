@@ -7,7 +7,7 @@
       "details": "Bangun Pagi Lebih Awal Hari ini"
     },
     {
-      "name": "Pergi ke Perpustakaan Nasional",
+      "name": "React Native",
       "time": "13.00",
       "details": "Refreshing keluar rumah",
       "id": 2
@@ -17,6 +17,12 @@
       "time": "05.00",
       "details": "lari pagi di lapangan pomad",
       "id": 3
+    },
+    {
+      "name": "Minum Air",
+      "time": "12.00",
+      "details": "minum air jangan lupa",
+      "id": 4
     }
   ]
 }
