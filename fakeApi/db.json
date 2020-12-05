@@ -1,24 +1,22 @@
 {
-  "posts": [
+  "todos": [
     {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "name": "Bangun Pagi",
+      "time": "02.00 WIB",
+      "details": "Bangun Pagi Lebih Awal Hari ini"
     },
     {
-      "title": "React-Native",
-      "author": "Muhammad Rizki",
+      "name": "Pergi ke Perpustakaan Nasional",
+      "time": "13.00",
+      "details": "Refreshing keluar rumah",
       "id": 2
-    }
-  ],
-  "comments": [
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "name": "Lari Pagi ",
+      "time": "05.00",
+      "details": "lari pagi di lapangan pomad",
+      "id": 3
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }

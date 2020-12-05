@@ -1,4 +1,5 @@
-import React from 'react'
+import Axios from 'axios'
+import React, { useState } from 'react'
 import { StyleSheet, Text, View, Image, ScrollView, TextInput, Button } from 'react-native'
 
 const Item = () => {
@@ -18,14 +19,46 @@ const Item = () => {
 
 const LocalApi = () => {
 
+    const [name, setName] = useState("")
+    const [time, setTime] = useState("")
+    const [details, setDetails] = useState("")
+    
+    const submit = () => {
+        const data = {
+            name,
+            time,
+            details
+        }
+        console.log('Data Sebelum di Set ', data)
+        Axios.post('http://10.0.2.2:3000/todos', data)
+            .then(res => {
+                console.log('res: ', res)
+                setName("")
+                setTime("")
+                setDetails("")
+            })
+    }  
+
     return(
         <ScrollView style={styles.wrapper} >
             <Text style={styles.textTittle} >Simple Todo List</Text>
             <View style={{marginTop: 20}} >
-                <TextInput placeholder="Nama Kegiatan" style={styles.input} />
-                <TextInput placeholder="Jam Kegiatan" style={styles.input} />
-                <TextInput placeholder="Keterangan Kegiatan" style={styles.input} />
-                <Button title="Simpan" />
+                <TextInput 
+                    placeholder="Nama" 
+                    style={styles.input} 
+                    value={name} 
+                    onChangeText={(value) => setName(value)} />
+                <TextInput 
+                    placeholder="Jam" 
+                    style={styles.input} 
+                    value={time} 
+                    onChangeText={(value) => setTime(value)} />
+                <TextInput 
+                    placeholder="Keterangan" 
+                    style={styles.input} 
+                    value={details} 
+                    onChangeText={(value) => setDetails(value)} />
+                <Button title="Simpan" onPress={submit} />
             </View>
                 <Item />
                 <Item />
