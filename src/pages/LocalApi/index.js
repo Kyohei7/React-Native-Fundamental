@@ -1,8 +1,8 @@
 import Axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, View, Image, ScrollView, TextInput, Button, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Image, ScrollView, TextInput, Button, TouchableOpacity, Alert } from 'react-native'
 
-const Item = ({ name, time, details, onPress }) => {
+const Item = ({ name, time, details, onPress, onDelete }) => {
     return(
         <View style={styles.itemContainer} >
                 <TouchableOpacity onPress={onPress}>
@@ -13,7 +13,10 @@ const Item = ({ name, time, details, onPress }) => {
                         <Text style={styles.descTime}> {time} </Text>
                         <Text style={styles.descDetails}> {details} </Text>
                     </View>
+                <TouchableOpacity onPress={onDelete} >
                     <Text style={styles.delete} >Hapus</Text> 
+                </TouchableOpacity>
+  
             </View>
     )
 }
@@ -85,6 +88,16 @@ const LocalApi = () => {
         setButton("Update")
     }
 
+    // Delete Data
+    const deleteItem = (item) => {
+        console.log('Delete Item : ', item)
+        Axios.delete(`http://10.0.2.2:3000/todos/${item.id}`)
+            .then(res => {
+                console.log('Res Delete : ', res)
+                getData()
+            })
+    }
+
     return(
         <ScrollView style={styles.wrapper} >
             <Text style={styles.textTittle} >Simple Todo List</Text>
@@ -107,7 +120,24 @@ const LocalApi = () => {
                 <Button title={button} onPress={submit} />
             </View>
                 {todos.map(todo => {
-                    return <Item key={todo.id} name={todo.name} time={todo.time} details={todo.details} onPress={() => selectItem(todo)} />
+                    return <Item 
+                                key={todo.id} 
+                                name={todo.name} 
+                                time={todo.time} 
+                                details={todo.details} 
+                                onPress={() => selectItem(todo)} 
+                                onDelete={() => Alert.alert(
+                                    'Warning', 
+                                    'Are You Sure ?', 
+                                    [
+                                        {
+                                            text: 'No', 
+                                            onPress: () => console.log('Button No')
+                                        }, 
+                                        {
+                                            text: 'Yes', onPress: () => deleteItem(todo)
+                                        }
+                                    ])} />
                 })}
         </ScrollView>
     )

@@ -1,28 +1,3 @@
 {
-  "todos": [
-    {
-      "name": "Bangun Pagi",
-      "time": "02.00 WIB",
-      "details": "Bangun Pagi Lebih Awal Hari ini",
-      "id": 1
-    },
-    {
-      "name": "React Native",
-      "time": "13.00",
-      "details": "Refreshing keluar rumah",
-      "id": 2
-    },
-    {
-      "name": "Lari Sore",
-      "time": "05.00",
-      "details": "lari pagi di lapangan pomad",
-      "id": 3
-    },
-    {
-      "name": "Minum Air",
-      "time": "12.00",
-      "details": "minum air jangan lupa",
-      "id": 4
-    }
-  ]
+  "todos": []
 }
